@@ -1,0 +1,236 @@
+{
+  "name": "Highway Merge Demo",
+  "description": "Demonstrating autonomous vehicle behavior during highway merge scenario",
+  "duration": 30000,
+  "location": {
+    "name": "San Francisco Bay Area",
+    "center": [-122.4194, 37.7749],
+    "zoom": 15
+  },
+  "vehicles": [
+    {
+      "id": "ego-vehicle",
+      "type": "ego",
+      "model": "Tesla Model S",
+      "position": [-122.4194, 37.7749],
+      "heading": 45,
+      "speed": 65,
+      "turnSignal": "left",
+      "status": "autonomous",
+      "aiDecisionEngine": {
+        "confidence": 0.95,
+        "sensors": ["camera", "lidar", "radar"],
+        "processing": "active"
+      },
+      "privacyLevel": "protected",
+      "trajectory": [
+        {
+          "time": 0,
+          "position": [-122.4194, 37.7749],
+          "speed": 65,
+          "action": "maintaining_lane"
+        },
+        {
+          "time": 5000,
+          "position": [-122.4190, 37.7753],
+          "speed": 62,
+          "action": "signaling_left"
+        },
+        {
+          "time": 10000,
+          "position": [-122.4186, 37.7757],
+          "speed": 60,
+          "action": "lane_change_initiated"
+        },
+        {
+          "time": 15000,
+          "position": [-122.4182, 37.7761],
+          "speed": 63,
+          "action": "lane_change_complete"
+        },
+        {
+          "time": 20000,
+          "position": [-122.4178, 37.7765],
+          "speed": 67,
+          "action": "accelerating"
+        },
+        {
+          "time": 30000,
+          "position": [-122.4170, 37.7773],
+          "speed": 70,
+          "action": "cruise_control"
+        }
+      ]
+    },
+    {
+      "id": "lead-vehicle",
+      "type": "other",
+      "model": "Generic SUV",
+      "position": [-122.4184, 37.7759],
+      "heading": 45,
+      "speed": 70,
+      "turnSignal": null,
+      "status": "human_driven",
+      "trajectory": [
+        {
+          "time": 0,
+          "position": [-122.4184, 37.7759],
+          "speed": 70,
+          "action": "maintaining_speed"
+        },
+        {
+          "time": 15000,
+          "position": [-122.4172, 37.7771],
+          "speed": 68,
+          "action": "slight_deceleration"
+        },
+        {
+          "time": 30000,
+          "position": [-122.4160, 37.7783],
+          "speed": 69,
+          "action": "maintaining_speed"
+        }
+      ]
+    },
+    {
+      "id": "merge-vehicle",
+      "type": "other",
+      "model": "Honda Civic",
+      "position": [-122.4200, 37.7745],
+      "heading": 50,
+      "speed": 55,
+      "turnSignal": "left",
+      "status": "human_driven",
+      "trajectory": [
+        {
+          "time": 0,
+          "position": [-122.4200, 37.7745],
+          "speed": 55,
+          "action": "accelerating"
+        },
+        {
+          "time": 8000,
+          "position": [-122.4194, 37.7751],
+          "speed": 62,
+          "action": "merging"
+        },
+        {
+          "time": 12000,
+          "position": [-122.4190, 37.7755],
+          "speed": 65,
+          "action": "merge_complete"
+        },
+        {
+          "time": 30000,
+          "position": [-122.4175, 37.7770],
+          "speed": 68,
+          "action": "maintaining_speed"
+        }
+      ]
+    }
+  ],
+  "route": {
+    "origin": "Downtown San Francisco",
+    "destination": "Silicon Valley Tech Campus",
+    "eta": "12 min",
+    "totalDistance": "15.3 miles",
+    "nextTurn": "Exit 24B - Financial District",
+    "laneGuidance": "Keep left for exit",
+    "speedLimit": 65,
+    "trafficConditions": "moderate",
+    "weatherConditions": "clear",
+    "roadType": "highway"
+  },
+  "fieldOfView": {
+    "front": {
+      "angle": 120,
+      "distance": 150,
+      "sensors": ["camera", "lidar"]
+    },
+    "rear": {
+      "angle": 90,
+      "distance": 50,
+      "sensors": ["radar"]
+    },
+    "sides": {
+      "angle": 180,
+      "distance": 30,
+      "sensors": ["ultrasonic"]
+    }
+  },
+  "environment": {
+    "timeOfDay": "day",
+    "weather": "clear",
+    "visibility": "excellent",
+    "roadConditions": "dry",
+    "trafficDensity": "moderate"
+  },
+  "aiIntegrationPoints": {
+    "decisionEngine": {
+      "enabled": true,
+      "model": "neural_network_v2.1",
+      "confidence_threshold": 0.85,
+      "fallback_mode": "human_intervention"
+    },
+    "privacyFilters": {
+      "location_anonymization": true,
+      "personal_data_redaction": true,
+      "behavioral_pattern_masking": true
+    },
+    "dataCollection": {
+      "sensor_logs": "anonymized",
+      "decision_logs": "encrypted",
+      "user_consent": "required"
+    }
+  },
+  "events": [
+    {
+      "time": 3000,
+      "type": "ai_decision",
+      "description": "AI detects merge opportunity",
+      "data": {
+        "confidence": 0.92,
+        "action": "prepare_lane_change"
+      }
+    },
+    {
+      "time": 7000,
+      "type": "privacy_filter",
+      "description": "Location data anonymized for logging",
+      "data": {
+        "original_precision": "exact",
+        "filtered_precision": "approximate"
+      }
+    },
+    {
+      "time": 12000,
+      "type": "ai_decision",
+      "description": "AI completes successful merge",
+      "data": {
+        "confidence": 0.98,
+        "action": "merge_complete",
+        "safety_score": 0.95
+      }
+    },
+    {
+      "time": 18000,
+      "type": "user_notification",
+      "description": "Merge completed successfully",
+      "data": {
+        "message": "Autonomous merge completed safely",
+        "priority": "info"
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "created": "2025-09-08T21:15:00Z",
+    "author": "BEV Map Demo",
+    "purpose": "Recruiting demonstration and AI integration showcase",
+    "compliance": {
+      "gdpr": true,
+      "ccpa": true,
+      "anonymization": "implemented"
+    }
+  }
+}
